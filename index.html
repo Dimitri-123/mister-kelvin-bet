@@ -117,6 +117,8 @@
             letter-spacing: 0.5px;
             transition: background-color 0.2s;
             box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            text-decoration: none;
+            display: inline-block;
         }
         .pay-btn:hover {
             background-color: #16a34a;
@@ -126,47 +128,11 @@
             font-size: 11px;
             color: #94a3b8;
         }
-        #vip-content {
-            display: none;
-            background: #f0fdf4;
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #bbf7d0;
-            text-align: center;
-        }
-        #vip-content h2 {
-            color: #15803d;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        .match-card {
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: left;
-            border-left: 4px solid #22c55e;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-        }
-        .match-card strong {
-            color: #0f172a;
-            font-size: 14px;
-        }
-        .match-card span {
-            color: #16a34a;
-            font-weight: 600;
-            display: block;
-            margin-top: 4px;
-            font-size: 13px;
-        }
     </style>
-    <!-- Chargement asynchrone robuste du SDK Notch Pay -->
-    <script src="https://checkout.notchpay.co" async></script>
 </head>
 <body>
 
-    <div class="main-card" id="payment-container">
+    <div class="main-card">
         <div class="badge">Accès VIP Officiel</div>
         <h1>KING <span>PRONOSTICS</span></h1>
         <p>Débloquez instantanément les pronostics sécurisés et optimisés du jour.</p>
@@ -182,80 +148,20 @@
             <div class="feature-item">Déblocage instantané de l'espace</div>
         </div>
 
-        <button class="pay-btn" id="pay-button" onclick="payWithNotchPay()">Payer avec Mobile Money</button>
+        <!-- Formulaire de redirection vers l'API de paiement Notch Pay -->
+        <form action="https://api.notchpay.co/payments" method="POST" target="_blank">
+            <input type="hidden" name="email" value="client@kingpronostics.com">
+            <input type="hidden" name="name" value="Client VIP Kelvin">
+            <input type="hidden" name="amount" value="2100">
+            <input type="hidden" name="currency" value="XAF">
+            <input type="hidden" name="public_key" value="pk_test.SnPk9Mi1LSD6liRQV8V4PevPuViTCz8nVvbqeyPC8Lr0Eigwz4e">
+            <button type="submit" class="pay-btn">Payer avec Mobile Money</button>
+        </form>
         
         <div class="secure-text">
             🔒 Transaction sécurisée par MTN & Orange Money
         </div>
     </div>
-
-    <div class="main-card" id="vip-content">
-        <h2>🎉 ACCÈS VIP VALIDÉ !</h2>
-        <p>Félicitations, voici vos pronostics exclusifs :</p>
-        
-        <div class="match-card">
-            <strong>Match 1 :</strong> Real Madrid vs Barcelona<br>
-            <span>Pronostic : Les deux équipes marquent (Cote: 1.72)</span>
-        </div>
-        
-        <div class="match-card">
-            <strong>Match 2 :</strong> Manchester City vs Arsenal<br>
-            <span>Pronostic : Victoire Manchester City (Cote: 1.95)</span>
-        </div>
-    </div>
-
-    <script>
-    function payWithNotchPay() {
-        const btn = document.getElementById('pay-button');
-        btn.innerText = "Ouverture du paiement...";
-        btn.disabled = true;
-
-        // Vérification de la disponibilité du SDK avec un court délai de secours
-        let attempts = 0;
-        const checkSdk = setInterval(function() {
-            attempts++;
-            if (typeof NotchPay !== 'undefined' && typeof NotchPay.pay === 'function') {
-                clearInterval(checkSdk);
-                executePayment();
-            } else if (attempts > 10) {
-                clearInterval(checkSdk);
-                btn.innerText = "Payer avec Mobile Money";
-                btn.disabled = false;
-                alert("Impossible de joindre le serveur de paiement. Vérifiez votre connexion mobile.");
-            }
-        }, 300);
-    }
-
-    function executePayment() {
-        const btn = document.getElementById('pay-button');
-        try {
-            NotchPay.pay({
-                email: "client@kingpronostics.com",
-                name: "Client VIP Kelvin",
-                amount: 2100,
-                currency: "XAF",
-                reference: "vip_" + Date.now(),
-                public_key: "pk_test.SnPk9Mi1LSD6liRQV8V4PevPuViTCz8nVvbqeyPC8Lr0Eigwz4e"
-            }, {
-                onSuccess: function (response) {
-                    document.getElementById('payment-container').style.display = 'none';
-                    document.getElementById('vip-content').style.display = 'block';
-                },
-                onError: function (error) {
-                    btn.innerText = "Payer avec Mobile Money";
-                    btn.disabled = false;
-                    alert("Le paiement a échoué ou a été annulé.");
-                    console.error("Erreur Notch Pay:", error);
-                }
-            });
-        } catch (e) {
-            btn.innerText = "Payer avec Mobile Money";
-            btn.disabled = false;
-            console.error(e);
-            alert("Erreur lors de l'initialisation du paiement.");
-        }
-    }
-    </script>
 
 </body>
 </html>
