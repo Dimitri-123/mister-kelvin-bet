@@ -12,8 +12,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #090d16 0%, #111827 50%, #064e3b 100%);
-            color: #ffffff;
+            background-color: #f8fafc;
+            color: #1e293b;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,76 +22,73 @@
         }
         .main-card {
             width: 100%;
-            max-width: 460px;
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 440px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             padding: 35px 25px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             text-align: center;
         }
         .badge {
-            background: rgba(250, 204, 21, 0.15);
-            color: #facc15;
-            font-size: 12px;
+            background: #fef08a;
+            color: #854d0e;
+            font-size: 11px;
             font-weight: 700;
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             display: inline-block;
             margin-bottom: 15px;
-            border: 1px solid rgba(250, 204, 21, 0.3);
         }
         h1 {
-            color: #ffffff;
-            font-size: 26px;
+            color: #0f172a;
+            font-size: 24px;
             font-weight: 800;
             margin-bottom: 10px;
             text-transform: uppercase;
         }
         h1 span {
-            color: #facc15;
+            color: #ca8a04;
         }
         p {
-            color: #94a3b8;
+            color: #64748b;
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 25px;
         }
         .price-box {
-            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(6, 78, 59, 0.4));
+            background: #f1f5f9;
             border: 2px solid #22c55e;
             padding: 20px;
-            border-radius: 14px;
+            border-radius: 12px;
             margin-bottom: 25px;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
         }
         .price-label {
             font-size: 12px;
-            color: #cbd5e1;
+            color: #475569;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
+            font-weight: 600;
         }
         .price-value {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 900;
-            color: #22c55e;
-            text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+            color: #16a34a;
         }
         .features {
             text-align: left;
             margin-bottom: 25px;
-            background: rgba(15, 23, 42, 0.4);
+            background: #f8fafc;
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid #e2e8f0;
         }
         .feature-item {
             font-size: 13px;
-            color: #e2e8f0;
+            color: #334155;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -101,78 +98,69 @@
         }
         .feature-item::before {
             content: "✓";
-            color: #22c55e;
+            color: #16a34a;
             font-weight: bold;
             margin-right: 8px;
             font-size: 15px;
         }
         .pay-btn {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            background-color: #22c55e;
             color: white;
             border: none;
-            padding: 18px;
+            padding: 16px;
             font-size: 16px;
-            font-weight: 800;
-            border-radius: 12px;
+            font-weight: 700;
+            border-radius: 10px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
         }
         .pay-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.6);
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        }
-        .pay-btn:active {
-            transform: translateY(0);
+            background-color: #16a34a;
         }
         .secure-text {
             margin-top: 15px;
             font-size: 11px;
-            color: #64748b;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
+            color: #94a3b8;
         }
         #vip-content {
             display: none;
-            background: rgba(6, 95, 70, 0.9);
+            background: #f0fdf4;
             padding: 25px;
             border-radius: 16px;
-            border: 1px solid #34d399;
+            border: 1px solid #bbf7d0;
             text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
         }
         #vip-content h2 {
-            color: #facc15;
+            color: #15803d;
             font-size: 22px;
             margin-bottom: 10px;
         }
         .match-card {
-            background: rgba(0, 0, 0, 0.3);
+            background: #ffffff;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-top: 15px;
             text-align: left;
-            border-left: 4px solid #facc15;
+            border-left: 4px solid #22c55e;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border-top: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
         }
         .match-card strong {
-            color: #ffffff;
-            font-size: 15px;
+            color: #0f172a;
+            font-size: 14px;
         }
         .match-card span {
-            color: #4ade80;
+            color: #16a34a;
             font-weight: 600;
             display: block;
             margin-top: 4px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            font-size: 13px;
         }
     </style>
     <!-- Script officiel du SDK Notch Pay -->
@@ -181,31 +169,31 @@
 <body>
 
     <div class="main-card" id="payment-container">
-        <div class="badge">Accès Sécurisé VIP</div>
+        <div class="badge">Accès VIP Officiel</div>
         <h1>KING <span>PRONOSTICS</span></h1>
-        <p>Débloquez instantanément les pronostics VIP à forte cote de Mr Kelvin et sécurisez vos gains.</p>
+        <p>Débloquez instantanément les pronostics sécurisés et optimisés du jour.</p>
         
         <div class="price-box">
-            <div class="price-label">Tarif Unique</div>
+            <div class="price-label">Montant Unique</div>
             <div class="price-value">2 100 XAF</div>
         </div>
 
         <div class="features">
-            <div class="feature-item">Analyses détaillées des matchs du jour</div>
-            <div class="feature-item">Taux de réussite élevé & fiable</div>
-            <div class="feature-item">Accès immédiat après paiement Mobile Money</div>
+            <div class="feature-item">Analyses détaillées et fables</div>
+            <div class="feature-item">Validation par Mobile Money</div>
+            <div class="feature-item">Déblocage instantané de l'espace</div>
         </div>
 
-        <button class="pay-btn" onclick="payWithNotchPay()">Payer par Mobile Money</button>
+        <button class="pay-btn" onclick="payWithNotchPay()">Payer avec Mobile Money</button>
         
         <div class="secure-text">
-            🔒 Paiement 100% sécurisé via MTN & Orange Money (Notch Pay)
+            🔒 Transaction sécurisée par MTN & Orange Money
         </div>
     </div>
 
     <div class="main-card" id="vip-content">
         <h2>🎉 ACCÈS VIP VALIDÉ !</h2>
-        <p>Félicitations, voici vos pronostics exclusifs de la journée :</p>
+        <p>Félicitations, voici vos pronostics exclusifs :</p>
         
         <div class="match-card">
             <strong>Match 1 :</strong> Real Madrid vs Barcelona<br>
@@ -220,6 +208,11 @@
 
     <script>
     function payWithNotchPay() {
+        if (typeof NotchPay === 'undefined') {
+            alert("Erreur de chargement du module de paiement. Vérifiez votre connexion.");
+            return;
+        }
+
         NotchPay.pay({
             email: "client@kingpronostics.com",
             name: "Client VIP Kelvin",
@@ -233,7 +226,7 @@
                 document.getElementById('vip-content').style.display = 'block';
             },
             onError: function (error) {
-                alert("Le paiement a échoué ou a été annulé. Veuillez réessayer.");
+                alert("Le paiement a échoué ou a été annulé.");
                 console.error("Erreur Notch Pay:", error);
             }
         });
