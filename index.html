@@ -3,97 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING PRONOSTICS MR KELVIN - VIP</title>
+    <title>KING PRONOSTICS MR KELVIN - Espace VIP</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
+            background: linear-gradient(135deg, #090d16 0%, #111827 50%, #064e3b 100%);
             color: #ffffff;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
         }
-        .container {
+        .main-card {
             width: 100%;
-            max-width: 420px;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            max-width: 460px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             text-align: center;
         }
-        h1 {
+        .badge {
+            background: rgba(250, 204, 21, 0.15);
             color: #facc15;
-            font-size: 22px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 800;
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+        }
+        h1 span {
+            color: #facc15;
         }
         p {
             color: #94a3b8;
             font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .price-badge {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            font-size: 28px;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 12px;
+            line-height: 1.5;
             margin-bottom: 25px;
-            border: 1px dashed #22c55e;
         }
-        button {
-            background-color: #22c55e;
+        .price-box {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(6, 78, 59, 0.4));
+            border: 2px solid #22c55e;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+        }
+        .price-label {
+            font-size: 12px;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .price-value {
+            font-size: 34px;
+            font-weight: 900;
+            color: #22c55e;
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+        .features {
+            text-align: left;
+            margin-bottom: 25px;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .feature-item {
+            font-size: 13px;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+        .feature-item::before {
+            content: "✓";
+            color: #22c55e;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 15px;
+        }
+        .pay-btn {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 18px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 10px;
+            font-weight: 800;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
         }
-        button:hover {
-            background-color: #16a34a;
+        .pay-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.6);
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
         }
-        button:active {
+        .pay-btn:active {
             transform: translateY(0);
+        }
+        .secure-text {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
         }
         #vip-content {
             display: none;
-            background: #065f46;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #059669;
-            margin-top: 10px;
+            background: rgba(6, 95, 70, 0.9);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #34d399;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
         }
         #vip-content h2 {
-            color: #34d399;
-            font-size: 20px;
+            color: #facc15;
+            font-size: 22px;
             margin-bottom: 10px;
         }
         .match-card {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
             text-align: left;
-            font-size: 14px;
+            border-left: 4px solid #facc15;
         }
         .match-card strong {
-            color: #facc15;
+            color: #ffffff;
+            font-size: 15px;
+        }
+        .match-card span {
+            color: #4ade80;
+            font-weight: 600;
+            display: block;
+            margin-top: 4px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
     <!-- Script officiel du SDK Notch Pay -->
@@ -101,25 +180,41 @@
 </head>
 <body>
 
-    <div class="container" id="payment-container">
-        <h1>KING PRONOSTICS</h1>
-        <p>Débloquez instantanément l'accès aux pronostics VIP sécurisés du jour.</p>
-        <div class="price-badge">2 100 XAF</div>
-        <button onclick="payWithNotchPay()">Payer par Mobile Money</button>
+    <div class="main-card" id="payment-container">
+        <div class="badge">Accès Sécurisé VIP</div>
+        <h1>KING <span>PRONOSTICS</span></h1>
+        <p>Débloquez instantanément les pronostics VIP à forte cote de Mr Kelvin et sécurisez vos gains.</p>
+        
+        <div class="price-box">
+            <div class="price-label">Tarif Unique</div>
+            <div class="price-value">2 100 XAF</div>
+        </div>
+
+        <div class="features">
+            <div class="feature-item">Analyses détaillées des matchs du jour</div>
+            <div class="feature-item">Taux de réussite élevé & fiable</div>
+            <div class="feature-item">Accès immédiat après paiement Mobile Money</div>
+        </div>
+
+        <button class="pay-btn" onclick="payWithNotchPay()">Payer par Mobile Money</button>
+        
+        <div class="secure-text">
+            🔒 Paiement 100% sécurisé via MTN & Orange Money (Notch Pay)
+        </div>
     </div>
 
-    <div class="container" id="vip-content">
-        <h2>🎉 Accès VIP Validé !</h2>
-        <p>Bienvenue dans le cercle restreint des gagnants.</p>
+    <div class="main-card" id="vip-content">
+        <h2>🎉 ACCÈS VIP VALIDÉ !</h2>
+        <p>Félicitations, voici vos pronostics exclusifs de la journée :</p>
         
         <div class="match-card">
-            <strong>Match 1 :</strong> Côte d'Ivoire vs Sénégal<br>
-            <span>Pronostic : Victoire Côte d'Ivoire (Cote: 1.85)</span>
+            <strong>Match 1 :</strong> Real Madrid vs Barcelona<br>
+            <span>Pronostic : Les deux équipes marquent (Cote: 1.72)</span>
         </div>
         
         <div class="match-card">
-            <strong>Match 2 :</strong> Cameroun vs Nigeria<br>
-            <span>Pronostic : Plus de 1.5 buts (Cote: 1.45)</span>
+            <strong>Match 2 :</strong> Manchester City vs Arsenal<br>
+            <span>Pronostic : Victoire Manchester City (Cote: 1.95)</span>
         </div>
     </div>
 
@@ -134,10 +229,8 @@
             public_key: "pk_test.SnPk9Mi1LSD6liRQV8V4PevPuViTCz8nVvbqeyPC8Lr0Eigwz4e"
         }, {
             onSuccess: function (response) {
-                // Masquer le module de paiement et afficher le contenu VIP exclusif
                 document.getElementById('payment-container').style.display = 'none';
                 document.getElementById('vip-content').style.display = 'block';
-                alert("Paiement réussi avec succès ! Accès VIP accordé.");
             },
             onError: function (error) {
                 alert("Le paiement a échoué ou a été annulé. Veuillez réessayer.");
