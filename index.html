@@ -161,8 +161,8 @@
             font-size: 13px;
         }
     </style>
-    <!-- Script officiel du SDK Notch Pay -->
-    <script src="https://checkout.notchpay.co" charset="utf-8"></script>
+    <!-- Chargement asynchrone robuste du SDK Notch Pay -->
+    <script src="https://checkout.notchpay.co" async></script>
 </head>
 <body>
 
@@ -182,7 +182,7 @@
             <div class="feature-item">Déblocage instantané de l'espace</div>
         </div>
 
-        <button class="pay-btn" onclick="payWithNotchPay()">Payer avec Mobile Money</button>
+        <button class="pay-btn" id="pay-button" onclick="payWithNotchPay()">Payer avec Mobile Money</button>
         
         <div class="secure-text">
             🔒 Transaction sécurisée par MTN & Orange Money
@@ -206,11 +206,28 @@
 
     <script>
     function payWithNotchPay() {
-        if (typeof NotchPay === 'undefined') {
-            alert("Le module de paiement se charge, veuillez patienter une seconde et réitérer.");
-            return;
-        }
+        const btn = document.getElementById('pay-button');
+        btn.innerText = "Ouverture du paiement...";
+        btn.disabled = true;
 
+        // Vérification de la disponibilité du SDK avec un court délai de secours
+        let attempts = 0;
+        const checkSdk = setInterval(function() {
+            attempts++;
+            if (typeof NotchPay !== 'undefined' && typeof NotchPay.pay === 'function') {
+                clearInterval(checkSdk);
+                executePayment();
+            } else if (attempts > 10) {
+                clearInterval(checkSdk);
+                btn.innerText = "Payer avec Mobile Money";
+                btn.disabled = false;
+                alert("Impossible de joindre le serveur de paiement. Vérifiez votre connexion mobile.");
+            }
+        }, 300);
+    }
+
+    function executePayment() {
+        const btn = document.getElementById('pay-button');
         try {
             NotchPay.pay({
                 email: "client@kingpronostics.com",
@@ -225,13 +242,17 @@
                     document.getElementById('vip-content').style.display = 'block';
                 },
                 onError: function (error) {
+                    btn.innerText = "Payer avec Mobile Money";
+                    btn.disabled = false;
                     alert("Le paiement a échoué ou a été annulé.");
                     console.error("Erreur Notch Pay:", error);
                 }
             });
         } catch (e) {
+            btn.innerText = "Payer avec Mobile Money";
+            btn.disabled = false;
             console.error(e);
-            alert("Erreur lors de l'ouverture du guichet de paiement.");
+            alert("Erreur lors de l'initialisation du paiement.");
         }
     }
     </script>
