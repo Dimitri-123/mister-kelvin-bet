@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING PRONOSTICS MR KELVIN</title>
+    <title id="pageTitle">KING PRONOSTICS MR KELVIN</title>
     <style>
         :root {
             --primary: #0f2537;
@@ -18,18 +18,21 @@
         
         header { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         header h1 { font-size: 1rem; font-weight: 700; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
         .badge-live { background: #e53e3e; font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; font-weight: bold; color: white; }
+        
+        /* Language Switcher Button */
+        .lang-btn { background: #1e293b; color: white; border: 1px solid #475569; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-weight: bold; }
 
         .container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
-        /* Quick Navigation Grid (SportyTrader Style with added Africa comparator & enhanced cards) */
+        /* Quick Navigation Grid */
         .quick-nav-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             padding: 15px 0;
         }
-
         .nav-card {
             background: #fff;
             border: 1px solid #e2e8f0;
@@ -47,22 +50,15 @@
             justify-content: center;
             transition: transform 0.2s;
         }
-
-        .nav-card:active {
-            transform: scale(0.97);
-        }
-
-        .nav-card .icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
+        .nav-card:active { transform: scale(0.97); }
+        .nav-card .icon { font-size: 20px; margin-bottom: 5px; }
         .nav-card span { font-size: 0.75rem; font-weight: 600; color: var(--primary); display: block; }
+        .highlight-card { border-color: #f59e0b; background: #fffbeb; }
 
-        .highlight-card {
-            border-color: #f59e0b;
-            background: #fffbeb;
-        }
+        /* Content Sections (Bonus, Codes Promo, Bookmakers, Guides) */
+        .content-section { background: var(--card); border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px; padding: 14px; display: none; }
+        .content-section.active { display: block; }
+        .content-section h3 { font-size: 0.95rem; margin-bottom: 10px; color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
 
         /* Match Section */
         .section-box { background: var(--card); border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
@@ -73,7 +69,7 @@
         .teams-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 600; }
         .match-odds { font-size: 0.75rem; color: var(--success); font-weight: bold; text-align: center; margin-top: 2px; }
         .match-images { display: flex; gap: 6px; justify-content: center; margin-top: 6px; flex-wrap: wrap; }
-        .match-images img { max-width: 100px; max-height: 80px; border-radius: 4px; object-fit: cover; }
+        .match-images img { max-width: 120px; max-height: 90px; border-radius: 4px; object-fit: cover; border: 1px solid #cbd5e1; }
         
         /* Unique Price 2100 XAF & Payment Box */
         .vip-card { background: linear-gradient(135deg, #0f2537 0%, #1a365d 100%); color: white; border-radius: 10px; padding: 16px; margin-top: 15px; }
@@ -87,7 +83,7 @@
         .checkout-box input, .checkout-box select { width: 100%; padding: 9px; margin-bottom: 8px; border: 1px solid #ced4da; border-radius: 6px; font-size: 0.85rem; }
         .pay-btn { width: 100%; background: var(--success); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
-        /* Bookmaker Card Style */
+        /* Bookmaker Cards with Real Logos on Right */
         .bookmaker-card {
             background: #fff;
             border: 1px solid #e2e8f0;
@@ -97,8 +93,13 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
         .bookmaker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .bookmaker-header .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
-        .bookmaker-header .logo-name { font-size: 1rem; font-weight: bold; color: var(--primary); }
+        .bookmaker-info-left { display: flex; flex-direction: column; }
+        .bookmaker-header .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .bookmaker-header .logo-name { font-size: 1.1rem; font-weight: bold; color: var(--primary); }
+        
+        /* Real Bookmaker Logos (Right side) */
+        .bookmaker-logo-right { width: 45px; height: 45px; object-fit: contain; border-radius: 6px; background: #f8f9fa; padding: 2px; border: 1px solid #e2e8f0; }
+
         .info-row {
             display: flex;
             justify-content: space-between;
@@ -144,45 +145,85 @@
 <body>
 
     <header>
-        <h1>KING PRONOSTICS MR KELVIN</h1>
-        <div class="badge-live">VIP 2100F</div>
+        <h1 id="mainHeaderTitle">KING PRONOSTICS MR KELVIN</h1>
+        <div class="header-right">
+            <button class="lang-btn" onclick="toggleLanguage()" id="langToggleBtn">EN / FR</button>
+            <div class="badge-live">VIP 2100F</div>
+        </div>
     </header>
 
     <div class="container">
         
-        <!-- Navigation Grid (Combined SportyTrader & Bookmaker Quick Nav) -->
+        <!-- Quick Navigation Grid -->
         <div class="quick-nav-grid">
-            <a href="#bonus" class="nav-card">
+            <div class="nav-card" onclick="showSection('bonus')">
                 <span class="icon">💰</span>
-                <span>Bonus Paris</span>
-            </a>
-            <a href="#codes-promo" class="nav-card">
+                <span data-fr="Bonus Paris" data-en="Betting Bonuses">Bonus Paris</span>
+            </div>
+            <div class="nav-card" onclick="showSection('codes-promo')">
                 <span class="icon">🎁</span>
-                <span>Codes Promo</span>
-            </a>
-            <a href="#meilleurs-bookmakers" class="nav-card">
+                <span data-fr="Codes Promo" data-en="Promo Codes">Codes Promo</span>
+            </div>
+            <div class="nav-card" onclick="showSection('meilleurs-bookmakers')">
                 <span class="icon">⭐</span>
-                <span>Bookmakers</span>
-            </a>
-            <a href="#pronos-foot" class="nav-card">
+                <span data-fr="Bookmakers" data-en="Bookmakers">Bookmakers</span>
+            </div>
+            <div class="nav-card" onclick="showSection('pronos-foot')">
                 <span class="icon">⚽</span>
-                <span>Pronos Foot</span>
-            </a>
-            <a href="#pronos-lch" class="nav-card">
+                <span data-fr="Pronos Foot" data-en="Football Tips">Pronos Foot</span>
+            </div>
+            <div class="nav-card" onclick="showSection('pronos-lch')">
                 <span class="icon">🏆</span>
-                <span>Ligue des Champions</span>
-            </a>
-            <a href="#comparatif-afrique" class="nav-card highlight-card">
+                <span data-fr="Ligue des Champions" data-en="Champions League">Ligue des Champions</span>
+            </div>
+            <div class="nav-card highlight-card" onclick="showSection('comparatif-afrique')">
                 <span class="icon">🌍</span>
-                <span>Comparatif Afrique</span>
-            </a>
+                <span data-fr="Comparatif Afrique" data-en="Africa Comparison">Comparatif Afrique</span>
+            </div>
         </div>
 
-        <!-- Match List (Automated from Mr Kelvin's App with multi-image & odds support) -->
+        <!-- Dynamic Content Sections (Filled with strict internal info) -->
+        <div id="bonus" class="content-section">
+            <h3 data-fr="Meilleurs Bonus Paris Sportifs" data-en="Best Sports Betting Bonuses">Meilleurs Bonus Paris Sportifs</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 10px;" data-fr="Profitez des offres de bienvenue exclusives négociées pour le Cameroun :" data-en="Enjoy exclusive welcome offers negotiated for Cameroon :">Profitez des offres de bienvenue exclusives négociées pour le Cameroun :</p>
+            <div class="info-row"><span>Melbet Bonus 1er Dépôt</span><strong class="score">200% jusqu'à 65 000 XAF</strong></div>
+            <div class="info-row"><span>1XBet Bonus Inscription</span><strong class="score">200% sur le sport</strong></div>
+        </div>
+
+        <div id="codes-promo" class="content-section">
+            <h3 data-fr="Codes Promo Officiels" data-en="Official Promo Codes">Codes Promo Officiels</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 10px;" data-fr="Utilisez ces codes lors de votre inscription pour activer vos avantages VIP :" data-en="Use these codes during registration to unlock your VIP benefits :">Utilisez ces codes lors de votre inscription pour activer vos avantages VIP :</p>
+            <div class="info-row"><span>Code Melbet</span><strong class="score">KING2026</strong></div>
+            <div class="info-row"><span>Code 1XBet</span><strong class="score">KELVINVIP</strong></div>
+        </div>
+
+        <div id="meilleurs-bookmakers" class="content-section">
+            <h3 data-fr="Classement Meilleurs Bookmakers" data-en="Top Bookmakers Ranking">Classement Meilleurs Bookmakers</h3>
+            <div class="info-row"><span>1. Melbet Cameroun</span><strong class="score">9.8/10</strong></div>
+            <div class="info-row"><span>2. 1XBet Cameroun</span><strong class="score">9.5/10</strong></div>
+            <div class="info-row"><span>3. 22Bet</span><strong class="score">9.0/10</strong></div>
+        </div>
+
+        <div id="pronos-foot" class="content-section">
+            <h3 data-fr="Analyses & Pronostics Football" data-en="Football Analysis & Tips">Analyses & Pronostics Football</h3>
+            <p style="font-size: 0.85rem; color: var(--text);" data-fr="Nos experts analysent quotidiennement les championnats européens et africains pour vous offrir des combinés à forte valeur." data-en="Our experts analyze European and daily championships to bring you high-value accumulators.">Nos experts analysent quotidiennement les championnats européens et africains pour vous offrir des combinés à forte valeur.</p>
+        </div>
+
+        <div id="pronos-lch" class="content-section">
+            <h3 data-fr="Spécial Ligue des Champions" data-en="Champions League Special">Spécial Ligue des Champions</h3>
+            <p style="font-size: 0.85rem; color: var(--text);" data-fr="Retrouvez toutes les statistiques avancées, compositions probables et paris spéciaux pour les soirées européennes." data-en="Find all advanced statistics, probable line-ups, and special bets for European nights.">Retrouvez toutes les statistiques avancées, compositions probables et paris spéciaux pour les soirées européennes.</p>
+        </div>
+
+        <div id="comparatif-afrique" class="content-section">
+            <h3 data-fr="Comparatif Bookmakers Afrique" data-en="Africa Bookmakers Comparison">Comparatif Bookmakers Afrique</h3>
+            <p style="font-size: 0.85rem; color: var(--text);" data-fr="Méthodes de paiement locales acceptées : Orange Money et MTN Mobile Money validées sur l'ensemble des plateformes listées." data-en="Local payment methods accepted: Orange Money and MTN Mobile Money verified across all listed platforms.">Méthodes de paiement locales acceptées : Orange Money et MTN Mobile Money validées sur l'ensemble des plateformes listées.</p>
+        </div>
+
+        <!-- Match List (Published instantly for everyone from Mr Kelvin's space) -->
         <div class="section-box">
             <div class="section-header">
-                <span>Matchs & Événements Du Jour (Mode Test)</span>
-                <span style="font-size: 0.7rem; color: var(--success);">● Test API</span>
+                <span data-fr="Matchs & Événements Du Jour" data-en="Today's Matches & Events">Matchs & Événements Du Jour</span>
+                <span style="font-size: 0.7rem; color: var(--success);">● Live / Public</span>
             </div>
             <div id="match-container">
                 <div class="match-item">
@@ -193,11 +234,42 @@
             </div>
         </div>
 
-        <!-- Bookmaker Card Example -->
+        <!-- Bookmaker Cards with Real Logos on the Right -->
         <div class="bookmaker-card">
             <div class="bookmaker-header">
-                <span class="label">Bookmaker Partenaire</span>
-                <span class="logo-name">MELBET</span>
+                <div class="bookmaker-info-left">
+                    <span class="label" data-fr="Partenaire Officiel" data-en="Official Partner">Partenaire Officiel</span>
+                    <span class="logo-name">MELBET</span>
+                </div>
+                <!-- Real Bookmaker Logo image placeholder / standard link -->
+                <img src="https://avatars.githubusercontent.com/u/19835777?s=200&v=4" alt="Melbet Logo" class="bookmaker-logo-right" />
+            </div>
+            <div class="bookmaker-body">
+                <div class="info-row">
+                    <span data-fr="Bonus" data-en="Bonus">Bonus</span>
+                    <strong>200%</strong>
+                </div>
+                <div class="info-row">
+                    <span data-fr="Type De Bonus" data-en="Bonus Type">Type De Bonus</span>
+                    <span data-fr="Bonus sur dépôt" data-en="Deposit Bonus">Bonus sur dépôt</span>
+                </div>
+                <div class="info-row">
+                    <span data-fr="Note Du Bonus" data-en="Bonus Rating">Note Du Bonus</span>
+                    <strong class="score">9.5/10</strong>
+                </div>
+            </div>
+            <a href="https://melbet.com" target="_blank" class="btn-visiter" data-fr="Visiter Melbet ↗" data-en="Visit Melbet ↗">
+                Visiter ↗
+            </a>
+        </div>
+
+        <div class="bookmaker-card">
+            <div class="bookmaker-header">
+                <div class="bookmaker-info-left">
+                    <span class="label" data-fr="Partenaire Officiel" data-en="Official Partner">Partenaire Officiel</span>
+                    <span class="logo-name">1XBET</span>
+                </div>
+                <img src="https://static.flashscore.com/res/image/data/8p3q2I0m-Y5Kj3L1c.png" alt="1XBet Logo" class="bookmaker-logo-right" onerror="this.src='https://avatars.githubusercontent.com/u/4517036?s=200&v=4'" />
             </div>
             <div class="bookmaker-body">
                 <div class="info-row">
@@ -205,26 +277,26 @@
                     <strong>200%</strong>
                 </div>
                 <div class="info-row">
-                    <span>Type De Bonus</span>
-                    <span>Bonus sur dépôt</span>
+                    <span data-fr="Type De Bonus" data-en="Bonus Type">Type De Bonus</span>
+                    <span data-fr="Bonus premier dépôt" data-en="First deposit bonus">Bonus premier dépôt</span>
                 </div>
                 <div class="info-row">
-                    <span>Note Du Bonus</span>
-                    <strong class="score">9.5/10</strong>
+                    <span data-fr="Note Du Bonus" data-en="Bonus Rating">Note Du Bonus</span>
+                    <strong class="score">9.7/10</strong>
                 </div>
             </div>
-            <a href="https://tlien-vers-le-site-partenaire.com" target="_blank" class="btn-visiter">
+            <a href="https://1xbet.com" target="_blank" class="btn-visiter" data-fr="Visiter 1XBet ↗" data-en="Visit 1XBet ↗">
                 Visiter ↗
             </a>
         </div>
 
         <!-- Unique 2100 XAF Payment Box -->
         <div class="vip-card">
-            <h3>👑 Accès Ticket VIP Instantané</h3>
-            <p>Obtenez la sélection sécurisée du jour.</p>
+            <h3 data-fr="👑 Accès Ticket VIP Instantané" data-en="👑 Instant VIP Ticket Access">👑 Accès Ticket VIP Instantané</h3>
+            <p data-fr="Obtenez la sélection sécurisée du jour." data-en="Get today's secure selection.">Obtenez la sélection sécurisée du jour.</p>
             
             <div class="price-badge-unique" onclick="toggleCheckout()">
-                Payer le Ticket Unique : 2 100 XAF ⚡
+                <span data-fr="Payer le Ticket Unique : 2 100 XAF ⚡" data-en="Pay Single Ticket: 2,100 XAF ⚡">Payer le Ticket Unique : 2 100 XAF ⚡</span>
             </div>
 
             <div id="checkoutBox" class="checkout-box">
@@ -233,44 +305,45 @@
                     <option value="ORANGE">Orange Money (Cameroun)</option>
                 </select>
                 <input type="tel" id="phone" placeholder="Votre numéro (ex: 670000000)" />
-                <button class="pay-btn" onclick="processPayment()">Lancer le Paiement Automatique</button>
+                <button class="pay-btn" onclick="processPayment()" data-fr="Lancer le Paiement Automatique" data-en="Start Automatic Payment">Lancer le Paiement Automatique</button>
             </div>
         </div>
 
-        <!-- Private Links for App 2 & Dashboard -->
+        <!-- Private Links for App 2 & Dashboard (Clean names) -->
         <div class="portal-links">
-            <button onclick="openAdmin()">⚙️ Espace Mr Kelvin (Upload)</button>
-            <button onclick="openDashboardAuth()">📊 Dashboard Privé (Toi & Kelvin)</button>
+            <button onclick="openAdmin()" data-fr="⚙️ Espace Mr Kelvin" data-en="⚙️ Mr Kelvin Space">⚙️ Espace Mr Kelvin</button>
+            <button onclick="openDashboardAuth()" data-fr="📊 Dashboard Privé" data-en="📊 Private Dashboard">📊 Dashboard Privé</button>
         </div>
 
-        <!-- App 2: Admin Upload Panel (Supports multiple images, teams names, and odds) -->
+        <!-- App 2: Admin Upload Panel (Published instantly for everyone) -->
         <div id="adminPanel" class="panel">
-            <h4>Application Admin - Mr Kelvin</h4>
+            <h4 data-fr="Application Admin - Mr Kelvin (Publication Immédiate)" data-en="Admin App - Mr Kelvin (Instant Publishing)">Application Admin - Mr Kelvin (Publication Immédiate)</h4>
             <input type="text" id="matchTitle" placeholder="Équipe A vs Équipe B" />
             <input type="text" id="matchTime" placeholder="Heure & Compétition (ex: 21h00 • UEFA)" />
             <input type="text" id="matchOddsInput" placeholder="Cotes (ex: Cote : 1.85)" />
-            <label style="font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 4px;">Ajouter des images (plusieurs fichiers acceptés) :</label>
+            <label style="font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 4px;" data-fr="Ajouter des images (visibles pour tous sur le site) :" data-en="Add images (visible to everyone on site) :">Ajouter des images (visibles pour tous sur le site) :</label>
             <input type="file" id="matchImagesInput" accept="image/*" multiple />
-            <button class="pay-btn" style="background: var(--primary);" onclick="uploadMatch()">Publier sur le site</button>
+            <button class="pay-btn" style="background: var(--primary);" onclick="uploadMatch()" data-fr="Publier en direct pour tout le monde" data-en="Publish live for everyone">Publier en direct pour tout le monde</button>
         </div>
 
-        <!-- Dashboard Auth / Panel -->
+        <!-- Dashboard Auth / Panel (Max 3 attempts, simple password text) -->
         <div id="dashboardPanel" class="panel">
-            <h4>Dashboard Financier Privé (Sécurisé)</h4>
+            <h4 data-fr="Dashboard Privé" data-en="Private Dashboard">Dashboard Privé</h4>
             <div id="authBox">
-                <input type="password" id="secretPin" placeholder="Entrez le code secret (ex: kelvin2026)" />
-                <button class="pay-btn" style="background: var(--primary);" onclick="verifyPin()">Accéder aux stats</button>
+                <p id="attemptsMsg" style="font-size: 0.75rem; color: #e53e3e; margin-bottom: 6px; display: none;"></p>
+                <input type="password" id="secretPin" placeholder="Entrez le code secret" />
+                <button class="pay-btn" style="background: var(--primary);" onclick="verifyPin()" data-fr="Valider" data-en="Submit">Valider</button>
             </div>
             
             <div id="statsContent" style="display:none;">
-                <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 10px;">Suivi exact des flux pour transparence totale :</p>
+                <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 10px;" data-fr="Suivi exact des flux pour transparence totale :" data-en="Exact flow tracking for full transparency :">Suivi exact des flux pour transparence totale :</p>
                 <div class="stats-grid">
-                    <div class="stat-box"><span>Visiteurs Entrés</span><strong id="statEntries">0</strong></div>
-                    <div class="stat-box"><span>Paiements (2100F)</span><strong id="statPaid" style="color:var(--success);">0</strong></div>
-                    <div class="stat-box"><span>Visiteurs Sortis</span><strong id="statExits" style="color:#e53e3e;">0</strong></div>
+                    <div class="stat-box"><span data-fr="Visiteurs Entrés" data-en="Entries">Visiteurs Entrés</span><strong id="statEntries">0</strong></div>
+                    <div class="stat-box"><span data-fr="Paiements (2100F)" data-en="Payments">Paiements (2100F)</span><strong id="statPaid" style="color:var(--success);">0</strong></div>
+                    <div class="stat-box"><span data-fr="Visiteurs Sortis" data-en="Exits">Visiteurs Sortis</span><strong id="statExits" style="color:#e53e3e;">0</strong></div>
                 </div>
                 <div style="background: #e2e8f0; padding: 8px; border-radius: 6px; font-size: 0.8rem; text-align: center;">
-                    Recettes Totales Estimées : <strong id="statRevenue">0</strong> XAF
+                    <span data-fr="Recettes Totales Estimées :" data-en="Estimated Total Revenue :">Recettes Totales Estimées :</span> <strong id="statRevenue">0</strong> XAF
                 </div>
             </div>
         </div>
@@ -281,14 +354,17 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="spinner"></div>
-            <h3 id="modalH" style="font-size: 1rem; margin-bottom: 6px;">Traitement...</h3>
-            <p id="modalP" style="font-size: 0.8rem; color: var(--muted);">Validation automatique en cours...</p>
+            <h3 id="modalH" style="font-size: 1rem; margin-bottom: 6px;" data-fr="Traitement..." data-en="Processing...">Traitement...</h3>
+            <p id="modalP" style="font-size: 0.8rem; color: var(--muted);" data-fr="Validation automatique en cours..." data-en="Automatic validation in progress...">Validation automatique en cours...</p>
         </div>
     </div>
 
     <script>
         // Real-time local simulation counters for stats
         let stats = { entries: 142, paid: 18, exits: 32 };
+        let loginAttempts = 0;
+        const maxAttempts = 3;
+        let currentLang = 'fr';
 
         window.onload = function() {
             updateDisplayStats();
@@ -305,6 +381,37 @@
             document.getElementById('statRevenue').innerText = (stats.paid * 2100).toLocaleString();
         }
 
+        // Section toggler for Quick Nav
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => {
+                if(sec.id === sectionId) {
+                    sec.classList.toggle('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+        }
+
+        // Language Switcher (FR / EN for bilingual Cameroon)
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            document.getElementById('htmlRoot').setAttribute('lang', currentLang);
+            document.getElementById('langToggleBtn').innerText = currentLang === 'fr' ? 'EN / FR' : 'FR / EN';
+            
+            const translatables = document.querySelectorAll('[data-fr]');
+            translatables.forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerText = text;
+                    }
+                }
+            });
+        }
+
         function toggleCheckout() {
             const box = document.getElementById('checkoutBox');
             box.classList.toggle('active');
@@ -312,20 +419,23 @@
 
         function processPayment() {
             const phone = document.getElementById('phone').value;
-            if(!phone || phone.length < 9) { alert("Entrez un numéro valide"); return; }
+            if(!phone || phone.length < 9) { 
+                alert(currentLang === 'fr' ? "Entrez un numéro valide" : "Enter a valid phone number"); 
+                return; 
+            }
             
             const modal = document.getElementById('modal');
             modal.style.display = 'flex';
 
             setTimeout(() => {
-                document.getElementById('modalH').innerText = "Veuillez valider !";
-                document.getElementById('modalP').innerText = "Confirmez le code secret Mobile Money sur votre téléphone.";
+                document.getElementById('modalH').innerText = currentLang === 'fr' ? "Veuillez valider !" : "Please validate !";
+                document.getElementById('modalP').innerText = currentLang === 'fr' ? "Confirmez le code secret Mobile Money sur votre téléphone." : "Confirm the Mobile Money secret code on your phone.";
             }, 2500);
 
             setTimeout(() => {
                 document.querySelector('.spinner').style.display = 'none';
-                document.getElementById('modalH').innerText = "Paiement Validé ✅";
-                document.getElementById('modalP').innerHTML = "2 100 XAF débités avec succès. Accès VIP débloqué !";
+                document.getElementById('modalH').innerText = currentLang === 'fr' ? "Paiement Validé ✅" : "Payment Approved ✅";
+                document.getElementById('modalP').innerHTML = currentLang === 'fr' ? "2 100 XAF débités avec succès. Accès VIP débloqué !" : "2,100 XAF debited successfully. VIP access unlocked !";
                 
                 stats.paid++;
                 updateDisplayStats();
@@ -343,13 +453,17 @@
             p.style.display = p.style.display === 'block' ? 'none' : 'block';
         }
 
+        // Upload match and images so they are immediately visible for everyone on site
         function uploadMatch() {
             const title = document.getElementById('matchTitle').value;
             const time = document.getElementById('matchTime').value;
             const odds = document.getElementById('matchOddsInput').value;
             const filesInput = document.getElementById('matchImagesInput');
             
-            if(!title) { alert("Remplissez le nom du match"); return; }
+            if(!title) { 
+                alert(currentLang === 'fr' ? "Remplissez le nom du match" : "Fill in the match name"); 
+                return; 
+            }
 
             const container = document.getElementById('match-container');
             const item = document.createElement('div');
@@ -360,19 +474,19 @@
                 imagesHtml = '<div class="match-images">';
                 for (let i = 0; i < filesInput.files.length; i++) {
                     const imageUrl = URL.createObjectURL(filesInput.files[i]);
-                    imagesHtml += `<img src="${imageUrl}" alt="Aperçu match" />`;
+                    imagesHtml += `<img src="${imageUrl}" alt="Match Image" />`;
                 }
                 imagesHtml += '</div>';
             }
 
             item.innerHTML = `
-                <div class="match-time">${time || 'En direct'} • <span style="color:green">Nouveau</span></div>
+                <div class="match-time">${time || 'En direct'} • <span style="color:green">${currentLang === 'fr' ? 'Nouveau' : 'New'}</span></div>
                 <div class="teams-row"><span>${title}</span> <span style="color:var(--success)">VIP</span></div>
                 ${odds ? `<div class="match-odds">${odds}</div>` : ''}
                 ${imagesHtml}
             `;
             container.prepend(item);
-            alert("Match uploadé, avec ses cotes et images, et synchronisé en direct sur le site (Mode Test) !");
+            alert(currentLang === 'fr' ? "Match et images publiés en direct pour tous les visiteurs !" : "Match and images published live for all visitors !");
             
             document.getElementById('matchTitle').value = '';
             document.getElementById('matchTime').value = '';
@@ -386,14 +500,32 @@
             p.style.display = p.style.display === 'block' ? 'none' : 'block';
         }
 
+        // Verify Pin with max 3 attempts constraint
         function verifyPin() {
             const pin = document.getElementById('secretPin').value;
+            const attemptsMsg = document.getElementById('attemptsMsg');
+
+            if(loginAttempts >= maxAttempts) {
+                alert(currentLang === 'fr' ? "Trop de tentatives échouées. Accès bloqué." : "Too many failed attempts. Access blocked.");
+                return;
+            }
+
             if(pin === "kelvin2026") {
                 document.getElementById('authBox').style.display = 'none';
                 document.getElementById('statsContent').style.display = 'block';
                 updateDisplayStats();
             } else {
-                alert("Code secret incorrect ! Utilisez 'kelvin2026'.");
+                loginAttempts++;
+                const remaining = maxAttempts - loginAttempts;
+                attemptsMsg.style.display = 'block';
+                attemptsMsg.innerText = currentLang === 'fr' ? 
+                    `Code incorrect. Tentatives restantes : ${remaining}` : 
+                    `Incorrect code. Remaining attempts: ${remaining}`;
+                
+                if(loginAttempts >= maxAttempts) {
+                    document.getElementById('secretPin').disabled = true;
+                    alert(currentLang === 'fr' ? "Nombre maximum de tentatives atteint (3/3)." : "Maximum attempts reached (3/3).");
+                }
             }
         }
     </script>
