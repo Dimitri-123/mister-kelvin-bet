@@ -22,11 +22,47 @@
 
         .container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
-        /* SportyTrader Style Navigation Grid */
-        .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; }
-        .nav-card { background: var(--card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 6px; text-align: center; }
-        .nav-card .icon { font-size: 1.3rem; margin-bottom: 4px; }
+        /* Quick Navigation Grid (SportyTrader Style with added Africa comparator & enhanced cards) */
+        .quick-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px 0;
+        }
+
+        .nav-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #1e293b;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .nav-card:active {
+            transform: scale(0.97);
+        }
+
+        .nav-card .icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
         .nav-card span { font-size: 0.75rem; font-weight: 600; color: var(--primary); display: block; }
+
+        .highlight-card {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
 
         /* Match Section */
         .section-box { background: var(--card); border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
@@ -35,8 +71,11 @@
         .match-item { padding: 12px 14px; border-bottom: 1px solid #f1f3f5; display: flex; flex-direction: column; gap: 6px; }
         .match-time { font-size: 0.7rem; color: var(--muted); font-weight: 600; background: #e9ecef; padding: 2px 6px; border-radius: 4px; width: fit-content; margin: 0 auto; }
         .teams-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 600; }
+        .match-odds { font-size: 0.75rem; color: var(--success); font-weight: bold; text-align: center; margin-top: 2px; }
+        .match-images { display: flex; gap: 6px; justify-content: center; margin-top: 6px; flex-wrap: wrap; }
+        .match-images img { max-width: 100px; max-height: 80px; border-radius: 4px; object-fit: cover; }
         
-        /* Unique Price 2000 XAF & Payment Box */
+        /* Unique Price 2100 XAF & Payment Box */
         .vip-card { background: linear-gradient(135deg, #0f2537 0%, #1a365d 100%); color: white; border-radius: 10px; padding: 16px; margin-top: 15px; }
         .vip-card h3 { font-size: 1rem; margin-bottom: 6px; }
         .vip-card p { font-size: 0.8rem; opacity: 0.9; margin-bottom: 12px; }
@@ -48,14 +87,46 @@
         .checkout-box input, .checkout-box select { width: 100%; padding: 9px; margin-bottom: 8px; border: 1px solid #ced4da; border-radius: 6px; font-size: 0.85rem; }
         .pay-btn { width: 100%; background: var(--success); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
+        /* Bookmaker Card Style */
+        .bookmaker-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .bookmaker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .bookmaker-header .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+        .bookmaker-header .logo-name { font-size: 1rem; font-weight: bold; color: var(--primary); }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+        .info-row .score { color: var(--success); font-weight: bold; }
+        .btn-visiter {
+            display: block;
+            background: #fbbf24;
+            color: #0f172a;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
         /* Admin & Dashboard Toggles */
-        .portal-links { text-align: center; margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
+        .portal-links { text-align: center; margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .portal-links button { background: none; border: none; color: var(--muted); font-size: 0.75rem; text-decoration: underline; cursor: pointer; }
 
         /* Panels */
         .panel { background: white; border: 2px dashed #cbd5e1; border-radius: 8px; padding: 14px; margin-top: 12px; display: none; }
         .panel h4 { font-size: 0.9rem; margin-bottom: 8px; color: var(--primary); }
-        .panel input { width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem; }
+        .panel input, .panel textarea { width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem; }
 
         /* Dashboard Stats Grid */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
@@ -74,39 +145,86 @@
 
     <header>
         <h1>KING PRONOSTICS MR KELVIN</h1>
-        <div class="badge-live">VIP 2000F</div>
+        <div class="badge-live">VIP 2100F</div>
     </header>
 
     <div class="container">
         
-        <!-- Navigation Grid (SportyTrader Style) -->
-        <div class="nav-grid">
-            <div class="nav-card"><div class="icon">🏆</div><span>Ligue des Champions</span></div>
-            <div class="nav-card"><div class="icon">⚽</div><span>Pronostics Pro</span></div>
-            <div class="nav-card"><div class="icon">🎁</div><span>Codes Promo</span></div>
+        <!-- Navigation Grid (Combined SportyTrader & Bookmaker Quick Nav) -->
+        <div class="quick-nav-grid">
+            <a href="#bonus" class="nav-card">
+                <span class="icon">💰</span>
+                <span>Bonus Paris</span>
+            </a>
+            <a href="#codes-promo" class="nav-card">
+                <span class="icon">🎁</span>
+                <span>Codes Promo</span>
+            </a>
+            <a href="#meilleurs-bookmakers" class="nav-card">
+                <span class="icon">⭐</span>
+                <span>Bookmakers</span>
+            </a>
+            <a href="#pronos-foot" class="nav-card">
+                <span class="icon">⚽</span>
+                <span>Pronos Foot</span>
+            </a>
+            <a href="#pronos-lch" class="nav-card">
+                <span class="icon">🏆</span>
+                <span>Ligue des Champions</span>
+            </a>
+            <a href="#comparatif-afrique" class="nav-card highlight-card">
+                <span class="icon">🌍</span>
+                <span>Comparatif Afrique</span>
+            </a>
         </div>
 
-        <!-- Match List (Automated from Mr Kelvin's App) -->
+        <!-- Match List (Automated from Mr Kelvin's App with multi-image & odds support) -->
         <div class="section-box">
             <div class="section-header">
-                <span>Matchs & Événements Du Jour</span>
-                <span style="font-size: 0.7rem; color: var(--success);">● Direct</span>
+                <span>Matchs & Événements Du Jour (Mode Test)</span>
+                <span style="font-size: 0.7rem; color: var(--success);">● Test API</span>
             </div>
             <div id="match-container">
                 <div class="match-item">
                     <div class="match-time">Aujourd'hui • 20:00</div>
                     <div class="teams-row"><span>Real Madrid</span> <span>VS</span> <span>Barcelone</span></div>
+                    <div class="match-odds">Cote estimée : 2.15</div>
                 </div>
             </div>
         </div>
 
-        <!-- Unique 2000 XAF Payment Box -->
+        <!-- Bookmaker Card Example -->
+        <div class="bookmaker-card">
+            <div class="bookmaker-header">
+                <span class="label">Bookmaker Partenaire</span>
+                <span class="logo-name">MELBET</span>
+            </div>
+            <div class="bookmaker-body">
+                <div class="info-row">
+                    <span>Bonus</span>
+                    <strong>200%</strong>
+                </div>
+                <div class="info-row">
+                    <span>Type De Bonus</span>
+                    <span>Bonus sur dépôt</span>
+                </div>
+                <div class="info-row">
+                    <span>Note Du Bonus</span>
+                    <strong class="score">9.5/10</strong>
+                </div>
+            </div>
+            <a href="https://tlien-vers-le-site-partenaire.com" target="_blank" class="btn-visiter">
+                Visiter ↗
+            </a>
+        </div>
+
+        <!-- Unique 2100 XAF Payment Box -->
         <div class="vip-card">
             <h3>👑 Accès Ticket VIP Instantané</h3>
             <p>Obtenez la sélection sécurisée du jour.</p>
             
             <div class="price-badge-unique" onclick="toggleCheckout()">
-                Payer le Ticket Unique : 2 000 XAF ⚡
+                Payer le Ticket Unique : 2 100 XAF ⚡
             </div>
 
             <div id="checkoutBox" class="checkout-box">
@@ -125,12 +243,14 @@
             <button onclick="openDashboardAuth()">📊 Dashboard Privé (Toi & Kelvin)</button>
         </div>
 
-        <!-- App 2: Admin Upload Panel -->
+        <!-- App 2: Admin Upload Panel (Supports multiple images, teams names, and odds) -->
         <div id="adminPanel" class="panel">
             <h4>Application Admin - Mr Kelvin</h4>
             <input type="text" id="matchTitle" placeholder="Équipe A vs Équipe B" />
             <input type="text" id="matchTime" placeholder="Heure & Compétition (ex: 21h00 • UEFA)" />
-            <input type="file" id="matchImage" accept="image/*" />
+            <input type="text" id="matchOddsInput" placeholder="Cotes (ex: Cote : 1.85)" />
+            <label style="font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 4px;">Ajouter des images (plusieurs fichiers acceptés) :</label>
+            <input type="file" id="matchImagesInput" accept="image/*" multiple />
             <button class="pay-btn" style="background: var(--primary);" onclick="uploadMatch()">Publier sur le site</button>
         </div>
 
@@ -138,7 +258,7 @@
         <div id="dashboardPanel" class="panel">
             <h4>Dashboard Financier Privé (Sécurisé)</h4>
             <div id="authBox">
-                <input type="password" id="secretPin" placeholder="Entrez le code secret partagé" />
+                <input type="password" id="secretPin" placeholder="Entrez le code secret (ex: kelvin2026)" />
                 <button class="pay-btn" style="background: var(--primary);" onclick="verifyPin()">Accéder aux stats</button>
             </div>
             
@@ -146,7 +266,7 @@
                 <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 10px;">Suivi exact des flux pour transparence totale :</p>
                 <div class="stats-grid">
                     <div class="stat-box"><span>Visiteurs Entrés</span><strong id="statEntries">0</strong></div>
-                    <div class="stat-box"><span>Paiements (2000F)</span><strong id="statPaid" style="color:var(--success);">0</strong></div>
+                    <div class="stat-box"><span>Paiements (2100F)</span><strong id="statPaid" style="color:var(--success);">0</strong></div>
                     <div class="stat-box"><span>Visiteurs Sortis</span><strong id="statExits" style="color:#e53e3e;">0</strong></div>
                 </div>
                 <div style="background: #e2e8f0; padding: 8px; border-radius: 6px; font-size: 0.8rem; text-align: center;">
@@ -171,11 +291,9 @@
         let stats = { entries: 142, paid: 18, exits: 32 };
 
         window.onload = function() {
-            // Track entry
             updateDisplayStats();
         };
 
-        // Track exit when leaving page
         window.addEventListener('beforeunload', () => {
             stats.exits++;
         });
@@ -184,7 +302,7 @@
             document.getElementById('statEntries').innerText = stats.entries;
             document.getElementById('statPaid').innerText = stats.paid;
             document.getElementById('statExits').innerText = stats.exits;
-            document.getElementById('statRevenue').innerText = (stats.paid * 2000).toLocaleString();
+            document.getElementById('statRevenue').innerText = (stats.paid * 2100).toLocaleString();
         }
 
         function toggleCheckout() {
@@ -207,9 +325,8 @@
             setTimeout(() => {
                 document.querySelector('.spinner').style.display = 'none';
                 document.getElementById('modalH').innerText = "Paiement Validé ✅";
-                document.getElementById('modalP').innerHTML = "2 000 XAF débités avec succès. Accès VIP débloqué !";
+                document.getElementById('modalP').innerHTML = "2 100 XAF débités avec succès. Accès VIP débloqué !";
                 
-                // Increment paid stats automatically for transparency dashboard
                 stats.paid++;
                 updateDisplayStats();
 
@@ -229,19 +346,38 @@
         function uploadMatch() {
             const title = document.getElementById('matchTitle').value;
             const time = document.getElementById('matchTime').value;
+            const odds = document.getElementById('matchOddsInput').value;
+            const filesInput = document.getElementById('matchImagesInput');
+            
             if(!title) { alert("Remplissez le nom du match"); return; }
 
             const container = document.getElementById('match-container');
             const item = document.createElement('div');
             item.className = 'match-item';
+
+            let imagesHtml = '';
+            if (filesInput.files && filesInput.files.length > 0) {
+                imagesHtml = '<div class="match-images">';
+                for (let i = 0; i < filesInput.files.length; i++) {
+                    const imageUrl = URL.createObjectURL(filesInput.files[i]);
+                    imagesHtml += `<img src="${imageUrl}" alt="Aperçu match" />`;
+                }
+                imagesHtml += '</div>';
+            }
+
             item.innerHTML = `
                 <div class="match-time">${time || 'En direct'} • <span style="color:green">Nouveau</span></div>
                 <div class="teams-row"><span>${title}</span> <span style="color:var(--success)">VIP</span></div>
+                ${odds ? `<div class="match-odds">${odds}</div>` : ''}
+                ${imagesHtml}
             `;
             container.prepend(item);
-            alert("Match uploadé et synchronisé en direct sur le site !");
+            alert("Match uploadé, avec ses cotes et images, et synchronisé en direct sur le site (Mode Test) !");
+            
             document.getElementById('matchTitle').value = '';
             document.getElementById('matchTime').value = '';
+            document.getElementById('matchOddsInput').value = '';
+            document.getElementById('matchImagesInput').value = '';
             document.getElementById('adminPanel').style.display = 'none';
         }
 
@@ -252,13 +388,12 @@
 
         function verifyPin() {
             const pin = document.getElementById('secretPin').value;
-            // Code secret partagé entre toi et Kelvin (ex: 2026)
-            if(pin === "2026" || pin === "kelvin") {
+            if(pin === "kelvin2026") {
                 document.getElementById('authBox').style.display = 'none';
                 document.getElementById('statsContent').style.display = 'block';
                 updateDisplayStats();
             } else {
-                alert("Code secret incorrect ! Réservé uniquement à Mr Kelvin et toi.");
+                alert("Code secret incorrect ! Utilisez 'kelvin2026'.");
             }
         }
     </script>
