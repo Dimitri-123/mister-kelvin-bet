@@ -3,59 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING PRONOSTICS - MR KELVIN</title>
+    <title>KING PRONOSTICS MR KELVIN - Pronostics & Matchs en Direct</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f2537">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #fff; margin: 0; padding: 20px; text-align: center; }
-        .container { max-width: 420px; margin: auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
-        h1 { color: #facc15; font-size: 22px; margin-bottom: 5px; }
-        .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
-        .price-tag { background: #334155; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 18px; color: #22c55e; font-weight: bold; }
-        .instructions { background: #334155; padding: 12px; border-radius: 8px; font-size: 13px; text-align: left; margin-bottom: 15px; color: #cbd5e1; line-height: 1.5; }
-        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; text-align: center; font-size: 16px; box-sizing: border-box; }
-        .btn { background: #22c55e; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        .btn:hover { background: #16a34a; }
+        :root {
+            --primary-color: #0f2537;
+            --accent-color: #f59e0b;
+            --success-color: #28a745;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #6c757d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 70px; }
+        
+        /* En-tête et Bannière */
+        header { background: var(--primary-color); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .logo-area h1 { font-size: 1rem; font-weight: 700; letter-spacing: 0.5px; }
+        .promo-banner { background: #fff3cd; color: #856404; padding: 8px 12px; font-size: 0.82rem; text-align: center; font-weight: 600; border-bottom: 1px solid #ffeeba; }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 12px; }
+
+        /* Grille de navigation rapide (Style SportyTrader) */
+        .hero-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-color); margin: 16px 0 12px 0; }
+        .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .nav-card { background: var(--card-bg); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.02); text-decoration: none; color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .nav-card:hover { border-color: var(--accent-color); transform: translateY(-2px); }
+        .nav-card .icon { font-size: 1.4rem; margin-bottom: 6px; }
+        .nav-card span { font-size: 0.75rem; font-weight: 600; color: var(--primary-color); line-height: 1.2; }
+
+        /* Section Matchs / Événements */
+        .section-box { background: var(--card-bg); border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+        .section-header { background: #f8f9fa; padding: 12px 16px; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; }
+        
+        .match-item { padding: 12px 16px; border-bottom: 1px solid #f1f3f5; display: flex; flex-direction: column; gap: 8px; }
+        .match-item:last-child { border-bottom: none; }
+        .match-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-align: center; background: #e9ecef; padding: 2px 8px; border-radius: 4px; width: fit-content; margin: 0 auto 4px auto; }
+        
+        .teams-row { display: flex; justify-content: space-between; align-items: center; }
+        .team-info { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; font-weight: 600; color: var(--primary-color); }
+        .team-logo { width: 24px; height: 24px; border-radius: 50%; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold; color: #555; }
+        
+        /* Carte VIP & Paiement Automatique Mobile Money */
+        .vip-card { background: linear-gradient(135deg, #0f2537 0%, #1a365d 100%); color: white; border-radius: 10px; padding: 16px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .vip-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .vip-card p { font-size: 0.85rem; opacity: 0.9; margin-bottom: 14px; line-height: 1.4; }
+        
+        .price-buttons { display: flex; gap: 10px; margin-bottom: 12px; }
+        .price-btn { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 10px 4px; border-radius: 6px; font-weight: 700; cursor: pointer; text-align: center; font-size: 0.85rem; transition: all 0.2s; }
+        .price-btn.active, .price-btn:hover { background: #28a745; border-color: #28a745; }
+
+        .checkout-box { background: white; color: var(--text-main); padding: 14px; border-radius: 8px; margin-top: 10px; display: none; }
+        .checkout-box.active { display: block; }
+        .checkout-box input, .checkout-box select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem; }
+        .pay-action-btn { width: 100%; background: #28a745; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.95rem; }
+        .pay-action-btn:hover { background: #218838; }
+
+        /* Dashboard Privé & Sécurité (3 tentatives) */
+        .dashboard-box { background: white; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; margin-top: 20px; }
+        .input-box { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box; }
+        
+        .uploaded-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
+        .uploaded-gallery img { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; }
+
+        /* Pop-up PWA Installation Écran d'accueil */
+        #pwa-install-banner { position: fixed; bottom: 15px; left: 15px; right: 15px; background: var(--primary-color); color: white; padding: 14px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: none; z-index: 9999; align-items: center; justify-content: space-between; }
+        #pwa-install-banner button { background: var(--accent-color); border: none; color: #000; padding: 8px 14px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+
+        /* Modal / Statut Paiement */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000; display: none; }
+        .modal-content { background: white; padding: 24px; border-radius: 10px; width: 90%; max-width: 380px; text-align: center; }
+        .spinner { width: 38px; height: 38px; border: 4px solid #f3f3f3; border-top: 4px solid #28a745; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>KING PRONOSTICS</h1>
-        <p class="subtitle">Espace VIP officiel de Mr Kelvin</p>
-        
-        <div id="payment-box">
-            <div class="price-tag">Montant total : 2 100 FCFA</div>
-            
-            <div class="instructions">
-                📍 <strong>Destinataire :</strong> Stella Anti Enu (6782267408)<br>
-                💰 <strong>Détails :</strong> 2 000 FCFA (Accès VIP net) + <strong>100 FCFA</strong> (Frais de transaction API obligatoires)<br>
-                ⚠️ <em>Veuillez vérifier votre numéro et valider la transaction pour un accès immédiat.</em>
-            </div>
 
-            <input type="tel" id="user-phone" placeholder="Entrez votre numéro (ex: 67XXXXXXXX)" maxlength="9">
-            
-            <button class="btn" onclick="initiateOnePayment()">Payer 2 100 FCFA & Accéder</button>
+    <div class="promo-banner">🔥 Offre Exclusive : Retraits instantanés & Meilleurs pronostics par Mister Kelvin</div>
+
+    <header>
+        <div class="logo-area">
+            <h1>KING PRONOSTICS MR KELVIN</h1>
+        </div>
+        <div style="font-size: 0.75rem; background: #e53e3e; padding: 4px 8px; border-radius: 4px; font-weight: bold;">LIVE VIP</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="hero-title">Espace Officiel & Analyses d'Experts</div>
+        <div class="nav-grid">
+            <a href="#matchs" class="nav-card">
+                <div class="icon">🏆</div>
+                <span>Matchs du Jour</span>
+            </a>
+            <a href="#vip" class="nav-card">
+                <div class="icon">⚽</div>
+                <span>Pronostics Foot Pro</span>
+            </a>
+            <a href="#codes" class="nav-card">
+                <div class="icon">🎁</div>
+                <span>Codes Promo Bookmaker</span>
+            </a>
+            <a href="#comparatif" class="nav-card">
+                <div class="icon">📊</div>
+                <span>Comparatif Afrique</span>
+            </a>
+            <a href="#vip" class="nav-card" style="background: #fffbeb; border-color: #f59e0b;">
+                <div class="icon">⚡</div>
+                <span>Pass VIP (2000 XAF)</span>
+            </a>
+            <a href="#dashboard" class="nav-card" style="background: #f1f5f9;">
+                <div class="icon">🔒</div>
+                <span>Dashboard Privé</span>
+            </a>
         </div>
 
-        <div id="vip-content" style="display:none;">
-            <h3 style="color: #22c55e; margin-bottom: 10px;">Paiement Validé avec succès !</h3>
-            <p>Accès aux pronostics VIP débloqué.</p>
+        <div class="section-box" id="matchs">
+            <div class="section-header">
+                <span>Matchs & Événements Du Jour</span>
+                <span style="font-size: 0.75rem; color: var(--success-color);">● En Direct</span>
+            </div>
+            
+            <div id="match-list-container">
+                <div class="match-item">
+                    <div class="match-time">22 juil. 18:00 • Ligue des Champions</div>
+                    <div class="teams-row">
+                        <div class="team-info"><div class="team-logo">FCI</div> FC Iberia 1999</div>
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">VS</span>
+                        <div class="team-info">Slovan Bratislava <div class="team-logo">SLO</div></div>
+                    </div>
+                </div>
+                <div class="match-item">
+                    <div class="match-time">22 juil. 20:00 • Super Lig</div>
+                    <div class="teams-row">
+                        <div class="team-info"><div class="team-logo">FEN</div> Fenerbahce</div>
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted);">VS</span>
+                        <div class="team-info">Lugano <div class="team-logo">LUG</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vip-card" id="vip">
+            <h3>👑 Accès Pronostic VIP (Automatique)</h3>
+            <p>Obtenez instantanément la sélection exclusive de Mr Kelvin via Mobile Money (MTN / Orange).</p>
+            
+            <div class="price-buttons">
+                <div class="price-btn" onclick="selectAmount(2000, this)">2 000 XAF<br><span>1 Ticket</span></div>
+                <div class="price-btn" onclick="selectAmount(5000, this)">5 000 XAF<br><span>Pass 3 Jours</span></div>
+                <div class="price-btn" onclick="selectAmount(10000, this)">10 000 XAF<br><span>Pass Mois</span></div>
+            </div>
+
+            <div id="checkoutBox" class="checkout-box">
+                <p id="selectedPlanText" style="font-size: 0.85rem; font-weight: bold; margin-bottom: 8px; color: var(--primary-color);"></p>
+                <select id="operatorSelect">
+                    <option value="MTN">MTN Mobile Money</option>
+                    <option value="ORANGE">Orange Money</option>
+                </select>
+                <input type="tel" id="phoneInput" placeholder="Votre numéro (ex: 670000000)" />
+                <button class="pay-action-btn" onclick="triggerAutomaticPayment()">Valider le Paiement Automatique</button>
+            </div>
+        </div>
+
+        <div class="dashboard-box" id="dashboard">
+            <div class="section-title" style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 10px;">Dashboard Privé</div>
+            
+            <div id="loginBox">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Veuillez entrer le code d'accès sécurisé :</p>
+                <input type="password" id="secCode" class="input-box" placeholder="Code secret long...">
+                <button class="pay-action-btn" onclick="verifyDashboard()">Valider l'accès</button>
+                <p id="errorMsg" style="color: red; font-size: 0.8rem; margin-top: 8px; font-weight: bold;"></p>
+            </div>
+
+            <div id="adminPanel" style="display: none;">
+                <p style="font-size: 0.85rem; color: #047857; font-weight: bold; margin-bottom: 10px;">✅ Accès autorisé - Espace de gestion de Mr Kelvin</p>
+                <label style="font-size: 0.82rem; font-weight: bold;">Uploader une image / pronostic :</label>
+                <input type="file" id="imageInput" accept="image/*" class="input-box">
+                <button class="pay-action-btn" style="background: var(--primary-color);" onclick="uploadImage()">Publier l'image pour tous</button>
+                
+                <h4 style="font-size: 0.9rem; margin-top: 15px; color: var(--primary-color);">Images affichées en direct sur le site :</h4>
+                <div class="uploaded-gallery" id="galleryContainer"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="pwa-install-banner">
+        <div>
+            <strong>Installer King Pronos</strong>
+            <div style="font-size: 0.78rem; opacity: 0.9;">Accédez au site rapidement depuis votre écran d'accueil.</div>
+        </div>
+        <button id="installButton">Installer</button>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="spinner" id="modalSpinner"></div>
+            <h3 id="modalTitle" style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 8px;">Traitement en cours...</h3>
+            <p id="modalDesc" style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Veuillez valider la demande USSD sur votre téléphone.</p>
         </div>
     </div>
 
     <script>
-        function initiateOnePayment() {
-            const phone = document.getElementById('user-phone').value;
+        // --- 1. Gestion des montants et Paiement Automatique ---
+        let chosenAmount = 0;
+
+        function selectAmount(amount, element) {
+            document.querySelectorAll('.price-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            chosenAmount = amount;
+            
+            const box = document.getElementById('checkoutBox');
+            box.classList.add('active');
+            document.getElementById('selectedPlanText').innerText = `Montant sélectionné : ${amount.toLocaleString()} XAF`;
+        }
+
+        function triggerAutomaticPayment() {
+            const phone = document.getElementById('phoneInput').value;
+            const operator = document.getElementById('operatorSelect').value;
+
             if(!phone || phone.length < 9) {
-                alert("Veuillez entrer un numéro de téléphone valide à 9 chiffres.");
+                alert("Veuillez entrer un numéro de téléphone valide.");
                 return;
             }
 
-            alert("Connexion à l'API de paiement pour le débit de 2 100 FCFA sur le numéro " + phone + "...");
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
+
+            document.getElementById('modalTitle').innerText = `Connexion ${operator} Money...`;
+            document.getElementById('modalDesc').innerText = `Envoi d'une requête de prélèvement de ${chosenAmount.toLocaleString()} XAF au ${phone}.`;
+
             setTimeout(() => {
-                alert("Paiement validé ! Vos 2 000 FCFA nets sont sécurisés.");
-                document.getElementById('payment-box').style.display = 'none';
-                document.getElementById('vip-content').style.display = 'block';
-            }, 2000);
+                document.getElementById('modalTitle').innerText = "Veuillez valider !";
+                document.getElementById('modalDesc').innerText = `Une invite est apparue sur ${phone}. Entrez votre code secret pour confirmer.`;
+            }, 2500);
+
+            setTimeout(() => {
+                document.getElementById('modalSpinner').style.display = 'none';
+                document.getElementById('modalTitle').innerText = "Paiement Réussi ✅";
+                document.getElementById('modalDesc').innerHTML = `Transaction validée ! Vos pronostics VIP sont débloqués. Bon gain avec <b>KING PRONOSTICS</b> !`;
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.getElementById('modalSpinner').style.display = 'block';
+                }, 4000);
+            }, 6000);
         }
+
+        // --- 2. Dashboard Privé (Code long sécurisé + Blocage strict à 3 tentatives) ---
+        let attemptsLeft = 3;
+        const SECRET_MASTER_KEY = "Kelvin_Master_Secret_2026_Key#99"; // Code complexe
+
+        function verifyDashboard() {
+            const entered = document.getElementById('secCode').value;
+            const errElem = document.getElementById('errorMsg');
+
+            if (entered === SECRET_MASTER_KEY) {
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadGallery();
+            } else {
+                attemptsLeft--;
+                if (attemptsLeft <= 0) {
+                    document.getElementById('secCode').disabled = true;
+                    errElem.innerText = "Accès définitivement bloqué suite à 3 tentatives infructueuses.";
+                } else {
+                    errElem.innerText = `Code incorrect. Il vous reste ${attemptsLeft} tentative(s).`;
+                }
+            }
+        }
+
+        // --- 3. Upload d'images partagé en direct ---
+        function uploadImage() {
+            const fileInput = document.getElementById('imageInput');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let images = JSON.parse(localStorage.getItem('kelvin_images') || '[]');
+                    images.push(e.target.result);
+                    localStorage.setItem('kelvin_images', JSON.stringify(images));
+                    loadGallery();
+                    fileInput.value = '';
+                    alert("Image publiée avec succès pour tous les visiteurs du site !");
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert("Veuillez sélectionner une image.");
+            }
+        }
+
+        function loadGallery() {
+            const gallery = document.getElementById('galleryContainer');
+            if(!gallery) return;
+            gallery.innerHTML = '';
+            let images = JSON.parse(localStorage.getItem('kelvin_images') || '[]');
+            images.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                gallery.appendChild(img);
+            });
+        }
+        loadGallery();
+
+        // --- 4. Logique PWA (Pop-up installation écran d'accueil sans passer par le Play Store) ---
+        let deferredPrompt;
+        const installBanner = document.getElementById('pwa-install-banner');
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBanner.style.display = 'flex';
+        });
+
+        installButton.addEventListener('click', async () => {
+            installBanner.style.display = 'none';
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('Application installée sur l’écran d’accueil');
+                }
+                deferredPrompt = null;
+            }
+        });
     </script>
 </body>
 </html>
